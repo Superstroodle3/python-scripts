@@ -8,15 +8,28 @@ flag = False
 
 #try to import key modules
 try:
+    from colorama import init
+except ImportError:
+    print("colorama module not installed")
+    flag = True
+try:
+    from termcolor import colored
+except ImportError:
+    print("termcolor module not installed")
+    flag = True
+try:
     import os
 except ImportError:
-    print("os module not installed")
+    print(colored("os module not installed","red"))
     flag = True
 try:
     import git
 except ImportError:
-    print("gitpython module not installed")   
+    print(colored("gitpython module not installed","red"))
     flag = True
+
+#initialise print colours
+init()
 
 #if imports successful continue
 if flag is False:
@@ -31,11 +44,11 @@ if flag is False:
 
     #where input already exists in directory throw error
     if a in arr:
-        print("File found with the same name!")
+        print(colored("File found with the same name!","red"))
     elif a == "":
-        print("No directory specified")
+        print(colored("No directory specified","yellow"))
     else:
-        print("Proceeding")
+        print(colored("Proceeding","green"))
 
         #create directory, throw error if unsuccessful
         try:
@@ -43,9 +56,9 @@ if flag is False:
             os.mkdir(a)            
             repo = git.Repo.init(a)
         except OSError:
-            print("Creation of the directory {} failed".format(a))
+            print(colored("Creation of the directory {} failed".format(a),"red"))
         else:
-            print("Successfully created the directory {}".format(a))
+            print(colored("Successfully created the directory {}".format(a),"green"))
         
         #change directory to the newly created repository
         os.chdir(a)
@@ -63,9 +76,9 @@ if flag is False:
                 os.mkdir(c)
                 i = i + 1
             except OSError:
-                print("Creation of the folder {} failed".format(i))
+                print(colored("Creation of the folder {} failed".format(i),"red"))
             else:
-                print("Successfully created the directory {}".format(c))
+                print(colored("Successfully created the directory {}".format(c),"green"))
             if(i > int(b)):
                 #once all folders created print git status
                 print(repo.git.status())
