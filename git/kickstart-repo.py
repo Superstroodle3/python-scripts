@@ -1,7 +1,7 @@
 #############################################################################
 # script to initialise a git repository and assign it a number of folders   #
 # author: Nathan Snelson                                                    #
-# date: 08/04/2020                                                          #
+# date: 09/04/2020                                                          #
 #############################################################################
 #boolean check for import success
 flag = False
@@ -33,53 +33,59 @@ init()
 
 #if imports successful continue
 if flag is False:
-    #get current directory
-    path = os.getcwd()
-    
-    #get contents of directory
-    arr = os.listdir()
+    #get current directory    
+    c = input("Enter the directory the new repo will be created in: ")
 
-    #prompt to get repo name
-    a = input("Enter your new repo name: ")
-
-    #where input already exists in directory throw error
-    if a in arr:
-        print(colored("File found with the same name!","red"))
-    elif a == "":
-        print(colored("No directory specified","yellow"))
+    try:
+        os.chdir(c)
+    except OSError:
+        print(colored("Directory doesn't exist!","red"))
     else:
-        print(colored("Proceeding","green"))
+        print(colored("Successfully found directory","green"))
+        #get contents of chosen directory
+        arr = os.listdir()
 
-        #create directory, throw error if unsuccessful
-        try:
-            #when directory created initialise it as a git repository
-            os.mkdir(a)            
-            repo = git.Repo.init(a)
-        except OSError:
-            print(colored("Creation of the directory {} failed".format(a),"red"))
+        #prompt to get repo name
+        a = input("Enter your new repo name: ")
+
+        #where input already exists in directory throw error
+        if a in arr:
+            print(colored("File found with the same name!","red"))
+        elif a == "":
+            print(colored("No directory specified","yellow"))
         else:
-            print(colored("Successfully created the directory {}".format(a),"green"))
-        
-        #change directory to the newly created repository
-        os.chdir(a)
-        newDir = os.getcwd()        
+            print(colored("Proceeding","green"))
 
-        #prompt to get number of folders
-        b = input("How many folders are required: ")
-        i = 1
-
-        #create folders
-        while True:            
+            #create directory, throw error if unsuccessful
             try:
-                #prompt to get the name of each folder
-                c = input("Provide a name for folder {}: ".format(i))         
-                os.mkdir(c)
-                i = i + 1
+                #when directory created initialise it as a git repository
+                os.mkdir(a)            
+                repo = git.Repo.init(a)
             except OSError:
-                print(colored("Creation of the folder {} failed".format(i),"red"))
+                print(colored("Creation of the directory {} failed".format(a),"red"))
             else:
-                print(colored("Successfully created the directory {}".format(c),"green"))
-            if(i > int(b)):
-                #once all folders created print git status
-                print(repo.git.status())
-                break
+                print(colored("Successfully created the directory {}".format(a),"green"))
+            
+            #change directory to the newly created repository
+            os.chdir(a)
+            newDir = os.getcwd()        
+
+            #prompt to get number of folders
+            b = input("How many folders are required: ")
+            i = 1
+
+            #create folders
+            while True:            
+                try:
+                    #prompt to get the name of each folder
+                    c = input("Provide a name for folder {}: ".format(i))         
+                    os.mkdir(c)
+                    i = i + 1
+                except OSError:
+                    print(colored("Creation of the folder {} failed".format(i),"red"))
+                else:
+                    print(colored("Successfully created the directory {}".format(c),"green"))
+                if(i > int(b)):
+                    #once all folders created print git status
+                    print(repo.git.status())
+                    break
