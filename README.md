@@ -5,11 +5,14 @@ Automating functions that can be tedious and frustrating in all aspects of setti
 
 Aiming to get different types of python script that provide these functions in easy to run scripts that require little effort to run/ maintain.
 
-Git scripts:
+## Git Scripts
+Folder of scripts to help with git functions.
 
-kickstart-repo: 
-script for starting a basic (empty) git repository
-required modules:
+###### kickstart-repo 
+Script for starting a basic (empty) git repository
+Required Modules:
+```
     - colorama
     - termcolor
     - gitpython
+```
