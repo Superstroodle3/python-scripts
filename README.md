@@ -8,7 +8,7 @@ Aiming to get different types of python script that provide these functions in e
 ## Git Scripts
 Folder of scripts to help with git functions.
 
-###### kickstart-repo 
+## kickstart-repo 
 Script for starting a basic (empty) git repository
 ```
 Required Modules:
