@@ -10,8 +10,8 @@ Folder of scripts to help with git functions.
 
 ###### kickstart-repo 
 Script for starting a basic (empty) git repository
-Required Modules:
 ```
+Required Modules:
     - colorama
     - termcolor
     - gitpython
