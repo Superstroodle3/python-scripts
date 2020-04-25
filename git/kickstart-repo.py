@@ -31,6 +31,15 @@ except ImportError:
 #initialise print colours
 init()
 
+#function to create folders
+def createFolder(name):
+    try:      
+        os.mkdir(name)
+    except OSError:
+        print(colored("Creation of {} failed".format(name),"red"))
+    else:
+        print(colored("Successfully created {}".format(name),"green"))
+
 #if imports successful continue
 if flag is False:
     #get current directory    
@@ -62,9 +71,9 @@ if flag is False:
                 os.mkdir(a)            
                 repo = git.Repo.init(a)
             except OSError:
-                print(colored("Creation of the directory {} failed".format(a),"red"))
+                print(colored("Creation of {} failed".format(a),"red"))
             else:
-                print(colored("Successfully created the directory {}".format(a),"green"))
+                print(colored("Successfully created {}".format(a),"green"))
             
             #change directory to the newly created repository
             os.chdir(a)
@@ -75,16 +84,12 @@ if flag is False:
             i = 1
 
             #create folders
-            while True:            
-                try:
-                    #prompt to get the name of each folder
-                    c = input("Provide a name for folder {}: ".format(i))         
-                    os.mkdir(c)
-                    i = i + 1
-                except OSError:
-                    print(colored("Creation of the folder {} failed".format(i),"red"))
-                else:
-                    print(colored("Successfully created the directory {}".format(c),"green"))
+            while True:                        
+                #prompt to get the name of each folder
+                c = input("Provide a name for folder {}: ".format(i))
+                #pass name into function
+                createFolder(c)                
+                i = i + 1
                 if(i > int(b)):
                     #once all folders created print git status
                     print(repo.git.status())
