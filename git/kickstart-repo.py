@@ -1,7 +1,7 @@
 #############################################################################
 # script to initialise a git repository and assign it a number of folders   #
 # author: Nathan Snelson                                                    #
-# date: 09/04/2020                                                          #
+# date: 25/04/2020                                                          #
 #############################################################################
 #boolean check for import success
 flag = False
