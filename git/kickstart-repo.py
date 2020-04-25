@@ -71,9 +71,9 @@ if flag is False:
                 os.mkdir(a)            
                 repo = git.Repo.init(a)
             except OSError:
-                print(colored("Creation of the directory {} failed".format(a),"red"))
+                print(colored("Creation of {} failed".format(a),"red"))
             else:
-                print(colored("Successfully created the directory {}".format(a),"green"))
+                print(colored("Successfully created {}".format(a),"green"))
             
             #change directory to the newly created repository
             os.chdir(a)
