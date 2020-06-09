@@ -20,5 +20,5 @@ Script for starting a basic (empty) git repository
 Required Modules:
     - colorama
     - termcolor
-    - gitpython
+    - GitPython
 ```
